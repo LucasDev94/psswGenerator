@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css">
     <title>Pssw Generator</title>
-</head>
-<body>
-    <main class="container">
-        <div class="areaPsww">
-            <input type="text" class="areaPsww-pssw">
-            <div class="areaPssw-buttons">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="areaCustom">
-            <h2 class="areaCustom-title">Personalice su contraseña</h2>
-        </div>
+  </head>
 
-        <label for="numero">Número:</label>
-<input type="range" id="numero" name="numero" min="8" max="25" step="1">
-<p>Valor seleccionado: <span id="valor"></span></p>
+  <body>
+    <main class="container">
+      <div class="areaPssw">
+        <input type="text" class="areaPssw-pssw" />
+        <div class="areaPssw-buttons">
+          <img src="./icons/content_copy_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+          <img src="./icons/autorenew_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+        </div>
+      </div>
+      <div class="areaCustom">
+        <h2 class="areaCustom-title">Personalice su contraseña</h2>
+        <div class="areaCustom-digits">
+            <label for="numero">Número:</label>
+            <input type="range" id="numero" name="numero" min="8" max="25" step="1" value="15"/>
+            <p>Longitud de contraseña: <span id="valor"></span></p>
+        </div>
+        <form class="areaCustom-caracteres">
+            <input type="checkbox" class="areaCustom-caracteres-caracter" id="mayus"><label for="mayus">Mayusculas</label>
+            <input type="checkbox" class="areaCustom-caracteres-caracter" id="minus"><label for="minus">Minusculas</label>
+            <input type="checkbox" class="areaCustom-caracteres-caracter" id="character"><label for="character">Caracteres</label>
+            <input type="checkbox" class="areaCustom-caracteres-caracter" id="number"><label for="number">Numeros</label>
+        </form>
+      </div>
 
     </main>
     <script>
-        const slider = document.getElementById("numero");
-  const output = document.getElementById("valor");
-  output.innerHTML = slider.value;
+      const slider = document.getElementById("numero");
+      const output = document.getElementById("valor");
+      output.innerHTML = slider.value;
 
-  slider.oninput = function() {
-    output.innerHTML = this.value;
-  }
+      slider.oninput = function () {
+        output.innerHTML = this.value;
+      };
     </script>
-</body>
+  </body>
 </html>
