@@ -19,15 +19,29 @@
       <div class="areaCustom">
         <h2 class="areaCustom-title">Personalice su contraseña</h2>
         <div class="areaCustom-digits">
-            <label for="numero">Número:</label>
-            <input type="range" id="numero" name="numero" min="8" max="25" step="1" value="15"/>
-            <p>Longitud de contraseña: <span id="valor"></span></p>
+            <!-- <label for="numero">Número:</label> -->
+            <p>Longitud de contraseña: </p>
+            <div class="areaCustom-digits-select">
+              <span class="areaCustom-digits-select-value" id="valor"></span>
+              <input type="range" id="numero" name="numero" min="10" max="25" step="1" value="15" class="areaCustom-digits-select-range"/>
+            </div>
         </div>
-        <form class="areaCustom-caracteres">
-            <input type="checkbox" class="areaCustom-caracteres-caracter" id="mayus"><label for="mayus">Mayusculas</label>
-            <input type="checkbox" class="areaCustom-caracteres-caracter" id="minus"><label for="minus">Minusculas</label>
-            <input type="checkbox" class="areaCustom-caracteres-caracter" id="character"><label for="character">Caracteres</label>
-            <input type="checkbox" class="areaCustom-caracteres-caracter" id="number"><label for="number">Numeros</label>
+        <form class="areaCustom-characteres">
+            <legend>Elija el tipo de caracteres</legend>
+            <div class="areaCustom-characteres-boxes">
+              <div>
+                <input type="checkbox" class="areaCustom-characteres-character" id="mayus" checked><label class="areaCustom-characteres-character" for="mayus">Mayusculas</label>
+              </div>
+              <div>
+                <input type="checkbox" class="areaCustom-characteres-character" id="minus" checked><label class="areaCustom-characteres-character" for="minus">Minusculas</label>
+              </div>
+              <div>
+                <input type="checkbox" class="areaCustom-characteres-character" id="character" checked><label class="areaCustom-characteres-character" for="character">Simbolos</label>
+              </div>
+              <div>
+                <input type="checkbox" class="areaCustom-characteres-character" id="number" checked><label class="areaCustom-characteres-character" for="number">Numeros</label>
+              </div>
+            </div>
         </form>
       </div>
 
