@@ -12,8 +12,8 @@
       <div class="areaPssw">
         <input type="text" class="areaPssw-pssw" />
         <div class="areaPssw-buttons">
-          <img src="./icons/content_copy_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
-          <img src="./icons/autorenew_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+          <img src="./icons/content_copy_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="copy"/>
+          <img src="./icons/autorenew_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="generate">
         </div>
       </div>
       <div class="areaCustom">
@@ -46,14 +46,7 @@
       </div>
 
     </main>
-    <script>
-      const slider = document.getElementById("numero");
-      const output = document.getElementById("valor");
-      output.innerHTML = slider.value;
 
-      slider.oninput = function () {
-        output.innerHTML = this.value;
-      };
-    </script>
+    <script src="./js/pssw.js"></script>
   </body>
 </html>
