@@ -1,5 +1,6 @@
 :root {
   --border-radius-ap: 8px;
+  --small-title: 1.2rem;
 }
 
 html {
@@ -30,16 +31,18 @@ body {
 .container {
   background: rgba(255, 255, 255, 0.0901960784);
   width: 450px;
-  height: 350px;
+  height: 450px;
   border-radius: var(--border-radius-ap);
   padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 16px;
 }
 
 .areaPssw {
+  margin-top: 12px;
   width: 100%;
   height: 80px;
   display: flex;
@@ -77,10 +80,11 @@ body {
   font-size: 1.75rem;
 }
 .areaCustom-digits {
-  font-size: 1.2rem;
+  font-size: var(--small-title);
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 12px;
 }
 .areaCustom-digits-select {
   display: flex;
@@ -108,9 +112,14 @@ body {
   align-items: center;
   gap: 8px;
 }
+.areaCustom-characteres-title {
+  font-size: var(--small-title);
+  margin-bottom: 8px;
+}
 .areaCustom-characteres-boxes {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-areas: "mayus minus" "symbols numbers" "special special";
   -moz-column-gap: 40px;
        column-gap: 40px;
   row-gap: 8px;
@@ -119,6 +128,20 @@ body {
   display: flex;
   gap: 4px;
 }
+.areaCustom-characteres-boxes div:nth-child(5) {
+  justify-self: start;
+  grid-area: special;
+}
 .areaCustom-characteres-character {
   cursor: pointer;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.1rem;
+}
+.error span {
+  color: #ff9701;
 }/*# sourceMappingURL=style.css.map */
