@@ -35,8 +35,8 @@ body {
 
 .container {
   background: #ffffff17;
-  width: 450px;
-  height: 450px;
+  width: 410px;
+  height: 550px;
   border-radius: var(--border-radius-ap);
   padding: 12px;
   display: flex;
@@ -46,8 +46,12 @@ body {
   gap: 16px;
 }
 
+.title{
+  text-align: center;
+}
+
 .areaPssw {
-  margin-top: 12px;
+  //margin-top: 12px;
   width: 100%;
   height: 80px;
   display: flex;

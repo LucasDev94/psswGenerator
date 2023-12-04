@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css">
-    <title>Pssw Generator</title>
+    <link rel="icon" type="png" href="./icons/icon.png">
+    <title>PsswGenerator</title>
   </head>
 
   <body>
     <main class="container">
+      <h1 class="title">Mini Generador de contraseñas seguras</h1>
       <div class="areaPssw">
         <input type="text" class="areaPssw-pssw" />
         <div class="areaPssw-buttons">
@@ -17,7 +19,7 @@
         </div>
       </div>
       <div class="areaCustom">
-        <h2 class="areaCustom-title">Personalice su contraseña</h2>
+        <h2 class="areaCustom-title">Personalizar contraseña</h2>
         <div class="areaCustom-digits">
             <!-- <label for="numero">Número:</label> -->
             <p>Longitud de contraseña: </p>
@@ -27,7 +29,7 @@
             </div>
         </div>
         <form class="areaCustom-characteres">
-            <legend class="areaCustom-characteres-title">Elija el tipo de caracteres</legend>
+            <legend class="areaCustom-characteres-title">Tipo de caracteres</legend>
             <div class="areaCustom-characteres-boxes">
               <div>
                 <input type="checkbox" class="areaCustom-characteres-character" id="mayus" checked><label class="areaCustom-characteres-character" for="mayus">Mayusculas</label>
@@ -42,7 +44,7 @@
                 <input type="checkbox" class="areaCustom-characteres-character" id="numbers" checked><label class="areaCustom-characteres-character" for="numbers">Numeros</label>
               </div>
               <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="special" checked><label class="areaCustom-characteres-character" for="special">Caracteres especiales</label>
+                <input type="checkbox" class="areaCustom-characteres-character" id="special"><label class="areaCustom-characteres-character" for="special">Caracteres especiales</label>
               </div>
             </div>
         </form>

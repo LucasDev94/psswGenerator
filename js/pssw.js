@@ -18,7 +18,7 @@ const characteres = [
 const textPssw = document.querySelector(".areaPssw-pssw")
 const longPssw = document.querySelector("#valor")
 const btnGenerate = document.querySelector("#generate");
-const copy = document.querySelector("#copy");
+const btnCopy = document.querySelector("#copy");
 const error = document.querySelector(".error");
 
 /** Selectores para los checkbox de html */
@@ -30,6 +30,8 @@ const special = document.querySelector("#special")
 
 /** Controlador de eventos */
 btnGenerate.addEventListener("click", psswGenerate)
+btnCopy.addEventListener("click", copyText)
+document.addEventListener('DOMContentLoaded', psswGenerate)
 
 /** Funcion para generar contraseñas */
 function psswGenerate(){
@@ -89,4 +91,9 @@ function psswGenerate(){
 
     /** Insercion de contraseña generada hacia html */
     textPssw.value = pssw.join("")
+}
+
+function copyText () {
+    let textToCopy = textPssw.value
+    navigator.clipboard.writeText(textToCopy)
 }
