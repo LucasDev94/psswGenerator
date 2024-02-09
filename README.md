@@ -6,11 +6,11 @@
 
 - Personalización: Puedes elegir la longitud de la contraseña (entre 10 y 25 caracteres) y los tipos de caracteres que quieres incluir:
 
- - Mayúsculas
- - Minúsculas
- - Números
- - Símbolos
- - Caracteres especiales
+ Mayúsculas
+Minúsculas
+Números
+Símbolos
+Caracteres especiales
 
 - Seguridad: El generador de contraseñas utiliza una combinación aleatoria de los tipos de caracteres seleccionados para crear una contraseña segura.
 
