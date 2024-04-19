@@ -1,4 +1,4 @@
-:root{
+:root {
   --border-radius-ap: 8px;
   --small-title: 1.2rem;
 }
@@ -16,25 +16,20 @@ html {
   padding: 0;
   overflow: hidden;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    0deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgb(104, 172, 185) 100%
-  );
+  background-image: linear-gradient(174.2deg, rgba(255, 244, 228, 1) 7.1%, rgba(240, 246, 238, 1) 67.4%);
   display: grid;
   place-content: center;
 }
 
 .container {
-  background: #ffffff17;
+  background: #3131310a;
+  backdrop-filter: 6px;
   width: 410px;
   height: 600px;
   border-radius: var(--border-radius-ap);
@@ -46,7 +41,7 @@ body {
   gap: 16px;
 }
 
-.title{
+.title {
   text-align: center;
   font-size: 2.3rem;
 }
@@ -57,7 +52,7 @@ body {
   height: 80px;
   display: flex;
   align-items: center;
-  background: #ffffff17;
+  background: #6d6d6d17;
   border-radius: var(--border-radius-ap);
 
   &-pssw {
@@ -110,7 +105,7 @@ body {
 
       &-value {
         display: inline-block;
-        background: #ffffff17;
+        background: #6d6d6d17;
         padding: 12px;
         border-radius: var(--border-radius-ap);
         //width: 16px;
@@ -118,15 +113,17 @@ body {
       }
 
       &-range {
-        width: 250px; /* Hace que el input ocupe el 100% del ancho del contenedor */
-        height: 40px; /* Altura del riel del rango */
+        width: 250px;
+        /* Hace que el input ocupe el 100% del ancho del contenedor */
+        height: 40px;
+        /* Altura del riel del rango */
         cursor: pointer;
       }
     }
   }
 
   &-characteres {
-    background-color: #ffffff17;
+    background-color: #6d6d6d17;
     padding: 16px;
     border-radius: var(--border-radius-ap);
     font-size: 1.1rem;
@@ -136,45 +133,45 @@ body {
     gap: 8px;
     // margin-bottom: 12px;
 
-    &-title{
+    &-title {
       font-size: var(--small-title);
       margin-bottom: 8px;
     }
-        
-    &-boxes{
+
+    &-boxes {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: 
+      grid-template-areas:
         "mayus minus"
         "symbols numbers"
         "special special";
       column-gap: 40px;
       row-gap: 8px;
-      
-      div{
+
+      div {
         display: flex;
         gap: 4px;
-        
-        &:nth-child(5){
+
+        &:nth-child(5) {
           justify-self: start;
           grid-area: special;
         }
       }
     }
 
-    &-character{
+    &-character {
       cursor: pointer;
     }
   }
 }
 
-.error{
+.error {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 1.1rem;
-  
-  span{
+
+  span {
     color: #ff9701;
   }
 }

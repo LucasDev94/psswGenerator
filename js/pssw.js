@@ -87,18 +87,7 @@ function psswGenerate(){
     pssw.push(typeCharacter[indiceElement])
     textPssw.value = pssw.join("")        
     }
-       
-//     let digit = 0
-//     while (digit < Number(longPssw.textContent)) {
-//         let typeCharacter = cWork[Math.floor(Math.random()*cWork.length)]
-//         let element = Math.floor(Math.random()*typeCharacter.length)
-
-//         digit++
-//         pssw.push(typeCharacter[element])
-//     }
-
-//     /** Insercion de contraseña generada hacia html */
-//     textPssw.value = pssw.join("")
+    
 }
 
 function copyText () {
