@@ -8,11 +8,11 @@ slider.oninput = function () {
 
 /** Caracteres disponibles, se puede agregar otro tipo de caracteres */
 const characteres = [
-    ["A","B","C","D","E","F","G","H","J","K","L","M","N",,"P","Q","R","S","T","U","V","W","X","Y","Z"],
+    ["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","U","V","W","X","Y","Z"],
     ["a","b","c","d","e","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","y","z"],
-    ["*","&","%","$","#","+","-","@"],
-    [2,3,4,5,6,7,8,9],
-    ["/",".","!",";","o","O","0","i","1","?","¡","(","l",")","<",">","=","_"]
+    ["*","&","%","#","+","-","@", "/", ".", "_"],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    // ["/",".","!",";","o","O","0","i","1","?","¡","(","l",")","<",">","=","_"]
 ]
 
 const textPssw = document.querySelector(".areaPssw-pssw")
@@ -26,12 +26,12 @@ const mayus = document.querySelector("#mayus");
 const minus = document.querySelector("#minus");
 const symbols = document.querySelector("#symbols");
 const numbers = document.querySelector("#numbers")
-const special = document.querySelector("#special")
+// const special = document.querySelector("#special")
 
 /** Controlador de eventos */
 btnGenerate.addEventListener("click", psswGenerate)
-btnCopy.addEventListener("click", copyText)
 document.addEventListener('DOMContentLoaded', psswGenerate)
+btnCopy.addEventListener("click", copyText)
 
 /** Funcion para generar contraseñas */
 function psswGenerate(){
@@ -45,7 +45,7 @@ function psswGenerate(){
     if (minus.checked === true) cWork.push(characteres[1])
     if (symbols.checked === true) cWork.push(characteres[2])
     if (numbers.checked === true) cWork.push(characteres[3])
-    if (special.checked === true) cWork.push(characteres[4])
+    // if (special.checked === true) cWork.push(characteres[4])
 
     /** Validando que que almenos una opcion de caracteres este seleccionada */
     function textError (){
@@ -80,17 +80,25 @@ function psswGenerate(){
     } 
 
     /** ciclo para elegir elementos al azar */
-    let digit = 0
-    while (digit < Number(longPssw.textContent)) {
-        let typeCharacter = cWork[Math.floor(Math.random()*cWork.length)]
-        let element = Math.floor(Math.random()*typeCharacter.length)
+    for (let i = 0; i < Number(longPssw.textContent); i++) {
+    let typeCharacter = cWork[Math.floor(Math.random() * cWork.length)];
+    let indiceElement = Math.floor(Math.random() * typeCharacter.length)
 
-        digit++
-        pssw.push(typeCharacter[element])
+    pssw.push(typeCharacter[indiceElement])
+    textPssw.value = pssw.join("")        
     }
+       
+//     let digit = 0
+//     while (digit < Number(longPssw.textContent)) {
+//         let typeCharacter = cWork[Math.floor(Math.random()*cWork.length)]
+//         let element = Math.floor(Math.random()*typeCharacter.length)
 
-    /** Insercion de contraseña generada hacia html */
-    textPssw.value = pssw.join("")
+//         digit++
+//         pssw.push(typeCharacter[element])
+//     }
+
+//     /** Insercion de contraseña generada hacia html */
+//     textPssw.value = pssw.join("")
 }
 
 function copyText () {

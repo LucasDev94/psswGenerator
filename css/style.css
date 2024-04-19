@@ -31,7 +31,7 @@ body {
 .container {
   background: rgba(255, 255, 255, 0.0901960784);
   width: 410px;
-  height: 550px;
+  height: 600px;
   border-radius: var(--border-radius-ap);
   padding: 12px;
   display: flex;
@@ -43,6 +43,7 @@ body {
 
 .title {
   text-align: center;
+  font-size: 2.3rem;
 }
 
 .areaPssw {
