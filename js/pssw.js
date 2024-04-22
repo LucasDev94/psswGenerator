@@ -105,12 +105,14 @@ function psswGenerate() {
 
   textPssw.value = pssw.join("");
 
-  securityColor.classList.remove("sec-medium-yellow", "sec-high-green");
+  securityColor.classList.remove("sec-medium-yellow", "sec-high-green", "sec-hightest-green");
   let secColor = undefined;
-  if (valueLongPssw <= 13) {
+  if (valueLongPssw <= 12) {
     secColor = "sec-medium-yellow"
-  } else {
+  } else if (valueLongPssw <= 17){
     secColor = "sec-high-green"
+  } else {
+    secColor = "sec-hightest-green"
   }
   securityColor.classList.add(secColor)
 }

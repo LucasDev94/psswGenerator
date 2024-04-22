@@ -108,7 +108,13 @@ body {
 }
 
 .sec-high-green {
-  background-color: #5dc460;
+  background-color: #9cd864;
+  width: 75%;
+  transition: 0.5s;
+}
+
+.sec-hightest-green {
+  background-color: #1eb823;
   width: 100%;
   transition: 0.5s;
 }
