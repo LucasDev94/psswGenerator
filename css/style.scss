@@ -51,9 +51,16 @@ body {
   width: 100%;
   height: 80px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: #6d6d6d17;
   border-radius: var(--border-radius-ap);
+  position: relative;
+
+  .generate-pssw{
+    display: flex;
+  }
 
   &-pssw {
     width: 100%;
@@ -79,6 +86,47 @@ body {
       cursor: pointer;
     }
   }
+}
+
+.security-color{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8px;
+  padding: 0;
+  margin: 0;
+  // background-color: #4ce253;
+
+  &-back{
+    width: 100%;
+    height: 8px;
+    background-color: #a7a7a7;
+    position: absolute;
+
+  }
+
+  &-aply{
+    height: 8px;
+    z-index: 2;
+    position: absolute;
+  }
+}
+
+// .sec-low-red{
+//   background-color: #e2514c;
+//   width: 33.33%;
+// }
+
+.sec-medium-yellow{
+  background-color: #f5d04b;
+  width: 55%;
+  transition: .5s;
+}
+
+.sec-high-green{
+  background-color: #5dc460;
+  width: 100%;
+  transition: .5s;
 }
 
 .areaCustom {
@@ -175,3 +223,15 @@ body {
     color: #ff9701;
   }
 }
+
+// .areaPssw-pssw.low-security {
+//   background-color: #ffcccc; /* Rojo para baja seguridad */
+// }
+
+// .areaPssw-pssw.medium-security {
+//   background-color: #ffff99; /* Amarillo para seguridad media */
+// }
+
+// .areaPssw-pssw.high-security {
+//   background-color: #99ff99; /* Verde para alta seguridad */
+// }

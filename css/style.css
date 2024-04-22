@@ -51,9 +51,15 @@ body {
   width: 100%;
   height: 80px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: rgba(109, 109, 109, 0.0901960784);
   border-radius: var(--border-radius-ap);
+  position: relative;
+}
+.areaPssw .generate-pssw {
+  display: flex;
 }
 .areaPssw-pssw {
   width: 100%;
@@ -73,6 +79,38 @@ body {
 }
 .areaPssw-buttons img {
   cursor: pointer;
+}
+
+.security-color {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8px;
+  padding: 0;
+  margin: 0;
+}
+.security-color-back {
+  width: 100%;
+  height: 8px;
+  background-color: #a7a7a7;
+  position: absolute;
+}
+.security-color-aply {
+  height: 8px;
+  z-index: 2;
+  position: absolute;
+}
+
+.sec-medium-yellow {
+  background-color: #f5d04b;
+  width: 55%;
+  transition: 0.5s;
+}
+
+.sec-high-green {
+  background-color: #5dc460;
+  width: 100%;
+  transition: 0.5s;
 }
 
 .areaCustom {

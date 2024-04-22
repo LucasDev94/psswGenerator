@@ -20,6 +20,7 @@ const longPssw = document.querySelector("#valor");
 const btnGenerate = document.querySelector("#generate");
 const btnCopy = document.querySelector("#copy");
 const error = document.querySelector(".error");
+const securityColor = document.querySelector(".security-color-aply");
 
 /** Selectores para los checkbox de html */
 const mayus = document.querySelector("#mayus");
@@ -80,29 +81,38 @@ function psswGenerate() {
 
   /** ciclo para elegir elementos al azar */
   for (let i = 0; i < valueLongPssw; i++) {
+    let typeCharacter = cWork[Math.floor(Math.random() * cWork.length)];
+    if (symbols.checked === true) typeCharacter = cWork[Math.floor(Math.random() * (cWork.length - 1))];
 
-    let typeCharacter = cWork[Math.floor(Math.random() * (cWork.length))];
-    if (symbols.checked === true) {typeCharacter = cWork[Math.floor(Math.random() * (cWork.length - 1))];}
     let indiceElement = Math.floor(Math.random() * typeCharacter.length);
 
     pssw.push(typeCharacter[indiceElement]);
     // return pssw;
-}
+  }
 
   /** Insertando simbolos segun la longitud de la contraseña, cada 6 caracteres se introduce un simbolo */
   if (symbols.checked === true) {
-      const howManySymbols = Math.floor(valueLongPssw / 6)
-      for (let i = 0; i < howManySymbols; i++) {
-          pssw.pop();
-          let newPosition = Math.floor(Math.random() * pssw.length) - 2;
-          let newElement = characteres[3][Math.floor(Math.random() * characteres[3].length)];
-          
-          pssw.splice(newPosition, 0, newElement)
-          // return pssw;
-        }
+    const howManySymbols = Math.floor(valueLongPssw / 6);
+    for (let i = 0; i < howManySymbols; i++) {
+      pssw.pop();
+      let newPosition = Math.floor(Math.random() * pssw.length) - 2;
+      let newElement = characteres[3][Math.floor(Math.random() * characteres[3].length)];
+
+      pssw.splice(newPosition, 0, newElement);
+      // return pssw;
     }
-    console.log(pssw);
-    textPssw.value = pssw.join("");
+  }
+
+  textPssw.value = pssw.join("");
+
+  securityColor.classList.remove("sec-medium-yellow", "sec-high-green");
+  let secColor = undefined;
+  if (valueLongPssw <= 13) {
+    secColor = "sec-medium-yellow"
+  } else {
+    secColor = "sec-high-green"
+  }
+  securityColor.classList.add(secColor)
 }
 
 function copyText() {
