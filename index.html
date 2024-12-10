@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" type="png" href="./icons/icon.png">
+    <link rel="icon" type="png" href="./icons/psswGeneratorIcon.png">
     <title>PsswGenerator</title>
   </head>
 
@@ -19,9 +19,15 @@
         <div class="generate-pssw">
 
           <input type="text" class="areaPssw-pssw" />
-          <div class="areaPssw-buttons">
-            <img src="./icons/content_copy_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="copy"/>
-            <img src="./icons/autorenew_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="generate">
+          <div class="areaPssw-areaButtons">
+            <div class="areaPssw-areaButtons-btn">
+              <img src="./icons/content_copy_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="copy"/>
+              <span>Copiar</span>
+            </div>
+            <div class="areaPssw-areaButtons-btn">
+              <img src="./icons/autorenew_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="generate">
+              <span>Generar</span>
+            </div>
           </div>
         </div>
         <div class="security-color">
@@ -33,14 +39,16 @@
       
       <div class="areaCustom">
         <h2 class="areaCustom-title">Personalizar contraseña</h2>
+        
         <div class="areaCustom-digits">
-            <!-- <label for="numero">Número:</label> -->
             <p>Longitud de contraseña: </p>
             <div class="areaCustom-digits-select">
-              <span class="areaCustom-digits-select-value" id="valor"></span>
+              <input type="number" class="areaCustom-digits-select-value" id="valor" min="10" max="25">
+              <!-- <span class="areaCustom-digits-select-value" id="valor"></span> -->
               <input type="range" id="numero" name="numero" min="10" max="25" step="1" value="15" class="areaCustom-digits-select-range"/>
             </div>
         </div>
+
         <form class="areaCustom-characteres">
             <legend class="areaCustom-characteres-title">Tipo de caracteres</legend>
             <div class="areaCustom-characteres-boxes">
@@ -56,9 +64,6 @@
               <div>
                 <input type="checkbox" class="areaCustom-characteres-character" id="numbers" checked><label class="areaCustom-characteres-character" for="numbers">Numeros</label>
               </div>
-              <!-- <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="special"><label class="areaCustom-characteres-character" for="special">Caracteres especiales</label>
-              </div> -->
             </div>
         </form>
       </div>
