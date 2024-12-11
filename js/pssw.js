@@ -1,20 +1,14 @@
-const slider = document.getElementById("numero");
-const output = document.getElementById("valor");
-output.innerHTML = slider.value;
-
-slider.oninput = function () {
-  output.innerHTML = this.value;
-};
 
 /** Caracteres disponibles, se puede agregar otro tipo de caracteres */
 const characteres = [
   ["A","B","C","D","E","F","G","H","J", "K", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",],
   ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",],
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  ["*", "&", "%", "#", "+", "-", "@", "/", ".", "_"],
-  // ["/",".","!",";","o","O","0","i","1","?","¡","(","l",")","<",">","=","_"]
+  ["*", "&", "%", "#", "+", "-", "@", "/", ".", "_","=",],
+  // ["/","!",";","O","0","i","1","?","¡","(","l",")","<",">"]
 ];
 
+// Selectores
 const textPssw = document.querySelector(".areaPssw-pssw");
 const longPssw = document.querySelector("#valor");
 const btnGenerate = document.querySelector("#generate");
@@ -28,6 +22,22 @@ const minus = document.querySelector("#minus");
 const symbols = document.querySelector("#symbols");
 const numbers = document.querySelector("#numbers");
 // const special = document.querySelector("#special")
+
+// Longitud de contraseña
+document.addEventListener('DOMContentLoaded', function() {
+  const rangeInput = document.querySelector('input[type="range"]');
+  const numberInput = document.querySelector('input[type="number"]');
+  
+  // Sincronizar el valor del range con el number
+  rangeInput.addEventListener('input', function() {
+    numberInput.value = rangeInput.value; // Actualizar el number con el valor del range
+  });
+  
+  // Sincronizar el valor del number con el range
+  numberInput.addEventListener('input', function() {
+    rangeInput.value = numberInput.value; // Actualizar el range con el valor del number
+  });
+});
 
 /** Controlador de eventos */
 btnGenerate.addEventListener("click", psswGenerate);
@@ -51,10 +61,7 @@ function psswGenerate() {
   function textError() {
     if (error.children.length === 0) {
       const imgAlert = document.createElement("img");
-      imgAlert.setAttribute(
-        "src",
-        "./icons/emergency_home_FILL0_wght400_GRAD0_opsz24.svg"
-      );
+      imgAlert.setAttribute("src", "./icons/emergency_home_FILL0_wght400_GRAD0_opsz24.svg");
 
       const textError = document.createElement("span");
       textError.innerText = "Se debe seleccionar almenos un tipo de caracter";
@@ -76,8 +83,7 @@ function psswGenerate() {
     if (spanElement) error.removeChild(spanElement);
   }
 
-  console.log(cWork);
-  const valueLongPssw = Number(longPssw.textContent);
+  const valueLongPssw = Number(longPssw.value);
 
   /** ciclo para elegir elementos al azar */
   for (let i = 0; i < valueLongPssw; i++) {
@@ -95,7 +101,7 @@ function psswGenerate() {
     const howManySymbols = Math.floor(valueLongPssw / 6);
     for (let i = 0; i < howManySymbols; i++) {
       pssw.pop();
-      let newPosition = Math.floor(Math.random() * pssw.length) - 2;
+      let newPosition = Math.floor(Math.random() * pssw.length) + 1; //con el +1 se evita que la contraseña inicie con simbolo
       let newElement = characteres[3][Math.floor(Math.random() * characteres[3].length)];
 
       pssw.splice(newPosition, 0, newElement);

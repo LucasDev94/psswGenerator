@@ -32,7 +32,7 @@ body {
   background: rgba(107, 107, 107, 0.039);
   backdrop-filter: 6px;
   width: 440px;
-  height: 680px;
+  height: 610px;
   border-radius: var(--border-radius-ap);
   padding: 12px;
   display: flex;
@@ -252,6 +252,16 @@ body {
 
   span {
     color: #ff9701;
+  }
+}
+
+@media (max-width: 440px) {
+  .container{
+    background: none;
+  }
+
+  .areaPssw{
+    width: 94%;
   }
 }
 
