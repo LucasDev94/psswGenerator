@@ -23,8 +23,14 @@ const symbols = document.querySelector("#symbols");
 const numbers = document.querySelector("#numbers");
 // const special = document.querySelector("#special")
 
+/** Controlador de eventos */
+btnGenerate.addEventListener("click", psswGenerate);
+document.addEventListener("DOMContentLoaded", psswGenerate);
+document.addEventListener("DOMContentLoaded", psswLongSynchronizer)
+btnCopy.addEventListener("click", copyText);
+
 // Longitud de contraseña
-document.addEventListener('DOMContentLoaded', function() {
+function psswLongSynchronizer() {
   const rangeInput = document.querySelector('input[type="range"]');
   const numberInput = document.querySelector('input[type="number"]');
   
@@ -37,12 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
   numberInput.addEventListener('input', function() {
     rangeInput.value = numberInput.value; // Actualizar el range con el valor del number
   });
-});
+};
 
-/** Controlador de eventos */
-btnGenerate.addEventListener("click", psswGenerate);
-document.addEventListener("DOMContentLoaded", psswGenerate);
-btnCopy.addEventListener("click", copyText);
 
 /** Funcion para generar contraseñas */
 function psswGenerate() {
@@ -61,7 +63,7 @@ function psswGenerate() {
   function textError() {
     if (error.children.length === 0) {
       const imgAlert = document.createElement("img");
-      imgAlert.setAttribute("src", "./icons/emergency_home_FILL0_wght400_GRAD0_opsz24.svg");
+      imgAlert.setAttribute("src", "./icons/notification.svg");
 
       const textError = document.createElement("span");
       textError.innerText = "Se debe seleccionar almenos un tipo de caracter";
@@ -123,6 +125,7 @@ function psswGenerate() {
   securityColor.classList.add(secColor)
 }
 
+// Copiar contraseña generada
 function copyText() {
   let textToCopy = textPssw.value;
   navigator.clipboard.writeText(textToCopy);
