@@ -15,6 +15,10 @@ const btnGenerate = document.querySelector("#generate");
 const btnCopy = document.querySelector("#copy");
 const error = document.querySelector(".error");
 const securityColor = document.querySelector(".security-color-aply");
+const iconOpenSavedPssw = document.querySelector("#iconOpenSavedPssw");
+const containerSavedPssw = document.querySelector(".contentListPssw");
+const iconCloseContainerSavedPssw = document.querySelector("#iconCloseContainerSavedPssw");
+const listSavedPssw = document.querySelector(".listPssw");
 
 /** Selectores para los checkbox de html */
 const mayus = document.querySelector("#mayus");
@@ -26,8 +30,11 @@ const numbers = document.querySelector("#numbers");
 /** Controlador de eventos */
 btnGenerate.addEventListener("click", psswGenerate);
 document.addEventListener("DOMContentLoaded", psswGenerate);
-document.addEventListener("DOMContentLoaded", psswLongSynchronizer)
+document.addEventListener("DOMContentLoaded", psswLongSynchronizer);
 btnCopy.addEventListener("click", copyText);
+iconOpenSavedPssw.addEventListener("click", openContainerSavedPssw);
+iconCloseContainerSavedPssw.addEventListener("click", closeContainerSavedPssw);
+listSavedPssw.addEventListener("click", createItemPssw);
 
 // Longitud de contraseña
 function psswLongSynchronizer() {
@@ -129,4 +136,25 @@ function psswGenerate() {
 function copyText() {
   let textToCopy = textPssw.value;
   navigator.clipboard.writeText(textToCopy);
+}
+
+// Abre el cuadro de lista de contraseñas copiadas anteriormente
+function openContainerSavedPssw () {
+  if (containerSavedPssw.classList.contains("inactive") === true) {
+    containerSavedPssw.classList.remove("inactive");    
+  }
+}
+
+
+// Cierra el cuadro de lista de contraseñas copiadas anteriormente
+function closeContainerSavedPssw () {
+  if (containerSavedPssw.classList.contains("inactive") === false) {
+    containerSavedPssw.classList.add("inactive");
+  }
+}
+
+
+// Crea los li.itemPssw en la ul.listPssw => Crea los itemas que conforman la lista de contraseñas guardadas
+function createItemPssw () {
+  
 }
