@@ -32,14 +32,14 @@ body {
   background: rgba(107, 107, 107, 0.039);
   backdrop-filter: 6px;
   width: 440px;
-  height: 610px;
+  height: 630px;
   border-radius: var(--border-radius-ap);
   padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-align: center;
 }
 
@@ -351,7 +351,7 @@ body {
     transform: translateY(0); /* Sube hasta la posición original */
     opacity: 0.5; /* Algo visible */
   }
-  90% {
+  92% {
     opacity: 1;
   }
   100% {
