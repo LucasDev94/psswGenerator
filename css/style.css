@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --border-radius-ap: 8px;
   --small-title: 1.2rem;
@@ -271,7 +272,13 @@ body {
   border-radius: 8px;
 }
 .itemPssw:hover {
-  background-color: rgba(100, 150, 216, 0.1725490196);
+  background-color: rgba(6, 36, 77, 0.1725490196);
+}
+
+.itemPsswValue {
+  width: 80%;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .actions {
@@ -282,6 +289,38 @@ body {
   cursor: pointer;
 }
 
+.taskNone {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+}
+
+.taskOK {
+  display: block; /* Muestra el icono */
+  position: absolute;
+  bottom: 100px;
+  animation: slideUp 0.6s ease-out forwards; /* Animación de subida */
+  z-index: 10;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px); /* Empieza abajo */
+    opacity: 0; /* Opaco */
+  }
+  50% {
+    transform: translateY(0); /* Sube hasta la posición original */
+    opacity: 0.5; /* Algo visible */
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px); /* Se mueve hacia arriba */
+    opacity: 0; /* Desaparece */
+  }
+}
 .inactive {
   display: none;
 }/*# sourceMappingURL=style.css.map */

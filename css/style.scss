@@ -305,9 +305,16 @@ body {
   border-radius: 8px;
 
   &:hover{
-    background-color: #6496d82c;
+    background-color: #06244d2c;
     //cursor: pointer;
   }
+}
+
+.itemPsswValue{
+  //background: #1eb823;
+  width: 80%;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .actions{
@@ -320,9 +327,38 @@ body {
   }
 }
 
+.taskNone{
+  display: none;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+}
 
+.taskOK{
+  display: block; /* Muestra el icono */
+  position: absolute;
+  bottom: 100px;
+  animation: slideUp .6s ease-out forwards; /* Animación de subida */  
+  z-index: 10;
+}
 
-
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px); /* Empieza abajo */
+    opacity: 0; /* Opaco */
+  }
+  50% {
+    transform: translateY(0); /* Sube hasta la posición original */
+    opacity: 0.5; /* Algo visible */
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px); /* Se mueve hacia arriba */
+    opacity: 0; /* Desaparece */
+  }
+}
 
 .inactive{
   display: none;

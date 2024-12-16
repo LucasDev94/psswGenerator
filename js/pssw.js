@@ -9,6 +9,7 @@ const characteres = [
 ];
 
 // Selectores
+const pssw = document.querySelector(".areaPssw-pssw")
 const textPssw = document.querySelector(".areaPssw-pssw");
 const longPssw = document.querySelector("#valor");
 const btnGenerate = document.querySelector("#generate");
@@ -18,7 +19,7 @@ const securityColor = document.querySelector(".security-color-aply");
 const iconOpenSavedPssw = document.querySelector("#iconOpenSavedPssw");
 const containerSavedPssw = document.querySelector(".contentListPssw");
 const iconCloseContainerSavedPssw = document.querySelector("#iconCloseContainerSavedPssw");
-const listSavedPssw = document.querySelector(".listPssw");
+const ulListSavedPssw = document.querySelector(".listPssw");
 
 /** Selectores para los checkbox de html */
 const mayus = document.querySelector("#mayus");
@@ -34,7 +35,9 @@ document.addEventListener("DOMContentLoaded", psswLongSynchronizer);
 btnCopy.addEventListener("click", copyText);
 iconOpenSavedPssw.addEventListener("click", openContainerSavedPssw);
 iconCloseContainerSavedPssw.addEventListener("click", closeContainerSavedPssw);
-listSavedPssw.addEventListener("click", createItemPssw);
+btnCopy.addEventListener("click", createItemPssw);
+ulListSavedPssw.addEventListener("click", copyPsswFromList);
+ulListSavedPssw.addEventListener("click", deletePsswFromList);
 
 // Longitud de contraseña
 function psswLongSynchronizer() {
@@ -129,14 +132,19 @@ function psswGenerate() {
   } else {
     secColor = "sec-hightest-green"
   }
-  securityColor.classList.add(secColor)
+  securityColor.classList.add(secColor);
+
+  showIconTaskOK ();
 }
 
 // Copiar contraseña generada
 function copyText() {
   let textToCopy = textPssw.value;
   navigator.clipboard.writeText(textToCopy);
+
+  showIconTaskOK ();
 }
+
 
 // Abre el cuadro de lista de contraseñas copiadas anteriormente
 function openContainerSavedPssw () {
@@ -155,6 +163,69 @@ function closeContainerSavedPssw () {
 
 
 // Crea los li.itemPssw en la ul.listPssw => Crea los itemas que conforman la lista de contraseñas guardadas
-function createItemPssw () {
-  
+function createItemPssw (event) {
+
+  // Crea Icono para copiar pssw del ul.listPssw
+  const iconCopy = document.createElement("img");
+  iconCopy.classList.add("copyItemPssw")
+  iconCopy.setAttribute("src", "./icons/copy.svg");
+
+  // Crea Icono para eliminar pssw del ul.listPssw
+  const iconDelete = document.createElement("img");
+  iconDelete.classList.add("deleteItemPssw")
+  iconDelete.setAttribute("src", "./icons/delete.svg");
+
+  // crea div.action que contiene a iconos de copiar y eliminar pssw
+  const divActions = document.createElement("div");
+  divActions.classList.add("actions");
+
+  // crea span.itemPsswValue
+  const spanItemPsswValue = document.createElement("span");
+  spanItemPsswValue.classList.add("itemPsswValue");
+  spanItemPsswValue.innerText = pssw.value
+
+  // Crea el li.itemPssw
+  const liItemPssw = document.createElement("li");
+  liItemPssw.classList.add("itemPssw");
+
+  // Anidando elementos
+  divActions.appendChild(iconCopy);
+  divActions.appendChild(iconDelete);
+  liItemPssw.appendChild(spanItemPsswValue);
+  liItemPssw.appendChild(divActions);
+  ulListSavedPssw.appendChild(liItemPssw);
 }
+
+
+// Copia las contraseñas del ul.listPssw
+function copyPsswFromList(event) {
+  if (event.target.classList.contains("copyItemPssw")) {
+    let textToCopy = event.target.parentElement.parentElement.children[0].textContent;
+    navigator.clipboard.writeText(textToCopy);
+    showIconTaskOK ();
+  }
+}
+
+
+// Elimina las contraseñas del ul.listPssw
+function deletePsswFromList (event) {
+  if (event.target.classList.contains("deleteItemPssw")){
+    let itemPsswToDelete = event.target.parentElement.parentElement
+    ulListSavedPssw.removeChild(itemPsswToDelete)
+    showIconTaskOK ();
+  }
+}
+
+// JavaScript para manejar el clic en los botones
+function showIconTaskOK() {
+  // Agregar la clase para la animación
+  const icon = document.getElementById('iconTaskOK');
+  icon.classList.remove('taskNone'); // Asegurarse de que se muestre
+  icon.classList.add('taskOK'); // Activar la animación
+
+  // Después de 1.4 segundos (el tiempo total de la animación), ocultar el icono
+  setTimeout(() => {
+    icon.classList.remove('taskOK');
+    icon.classList.add('taskNone');
+  }, 1050);
+};
