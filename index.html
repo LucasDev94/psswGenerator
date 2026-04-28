@@ -1,98 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
-    <!-- <link rel="icon" type="png" href="./icons/psswGeneratorIcon.png"> -->
-    <title>PsswGenerator</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./css/style.css">
+  
+  <title>SecurePass - Generador de Contraseñas</title>
+</head>
+<body>
+  
 
-  <body>
-    <main class="container">
-      <h1 class="title">Generador de contraseñas seguras</h1>
+
+  <main class="main-content">
+    <div class="bg-blob"></div>
+
+    <div class="pass-gen">
       
-      <div class="areaPssw">
-        <div class="generate-pssw">
+      <!-- Header -->
+      <div class="pass-gen__header">
+        <h1 class="pass-gen__title">Generador de Contraseñas</h1>
+        <p class="pass-gen__subtitle">Crea una contraseña segura y robusta.</p>
+      </div>
 
-          <input type="text" class="areaPssw-pssw" />
-          <div class="areaPssw-areaButtons">
-            <div class="areaPssw-areaButtons-btn" id="copy">
-              <img src="./icons/copy.svg" alt=""/>
-              <span>Copiar</span>
-            </div>
-            <div class="areaPssw-areaButtons-btn" id="generate">
-              <img src="./icons/autorenew.svg" alt="">
-              <span>Generar</span>
-            </div>
+      <!-- Display -->
+      <div class="password-group" id="passwordGroup">
+        <input type="text" class="password-group__input" id="passwordOutput" readonly aria-label="Contraseña generada" value="Cargando..." />
+        <button class="password-group__copy-btn" id="copyBtn" aria-label="Copiar contraseña">
+          <span class="material-symbols-outlined password-group__copy-icon" id="copyIcon">content_copy</span>
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="pass-gen__controls">
+        
+        <!-- Length Slider -->
+        <div class="pass-gen__length">
+          <div class="pass-gen__length-header">
+            <span>Longitud de contraseña</span>
+            <span class="pass-gen__length-badge" id="lengthDisplay">15</span>
           </div>
+          <input type="range" id="lengthRange" min="10" max="25" step="1" value="15" class="pass-gen__range"/>
         </div>
-        <div class="security-color">
-          <div class="security-color-back"></div>
-          <div class="security-color-aply sec-high-green"></div>
-        </div>
-      </div>
 
-      
-      <div class="areaCustom">
-        <h2 class="areaCustom-title">Personalizar contraseña</h2>
-        
-        <div class="areaCustom-digits">
-            <p>Longitud de contraseña: </p>
-            <div class="areaCustom-digits-select">
-              <input type="number" class="areaCustom-digits-select-value" id="valor" min="10" max="25" value="15">
-              <!-- <span class="areaCustom-digits-select-value" id="valor"></span> -->
-              <input type="range" id="numero" name="numero" min="10" max="25" step="1" value="15" class="areaCustom-digits-select-range"/>
+        <hr class="pass-gen__divider">
+
+        <!-- Switches -->
+        <div class="pass-gen__switches">
+          
+          <label class="pass-gen__switch">
+            <span class="pass-gen__switch-label">Mayúsculas (A-Z)</span>
+            <input type="checkbox" id="checkUppercase" class="pass-gen__switch-input" checked>
+            <div class="pass-gen__switch-track">
+              <span class="pass-gen__switch-thumb"></span>
             </div>
-        </div>
+          </label>
 
-        <form class="areaCustom-characteres">
-            <legend class="areaCustom-characteres-title">Tipo de caracteres</legend>
-            <div class="areaCustom-characteres-boxes">
-              <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="mayus" checked><label class="areaCustom-characteres-character" for="mayus">Mayusculas</label>
-              </div>
-              <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="minus" checked><label class="areaCustom-characteres-character" for="minus">Minusculas</label>
-              </div>
-              <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="symbols" checked><label class="areaCustom-characteres-character" for="symbols">Simbolos</label>
-              </div>
-              <div>
-                <input type="checkbox" class="areaCustom-characteres-character" id="numbers" checked><label class="areaCustom-characteres-character" for="numbers">Numeros</label>
-              </div>
+          <label class="pass-gen__switch">
+            <span class="pass-gen__switch-label">Minúsculas (a-z)</span>
+            <input type="checkbox" id="checkLowercase" class="pass-gen__switch-input" checked>
+            <div class="pass-gen__switch-track">
+              <span class="pass-gen__switch-thumb"></span>
             </div>
-        </form>
-      </div>
-      <p class="error"></p>
+          </label>
 
-      <div class="bgIcons" id="iconOpenSavedPssw">
-        <img src="./icons/list.svg" alt="">
+          <label class="pass-gen__switch">
+            <span class="pass-gen__switch-label">Números (0-9)</span>
+            <input type="checkbox" id="checkNumbers" class="pass-gen__switch-input" checked>
+            <div class="pass-gen__switch-track">
+              <span class="pass-gen__switch-thumb"></span>
+            </div>
+          </label>
+
+          <label class="pass-gen__switch">
+            <span class="pass-gen__switch-label">Símbolos (!@#$%)</span>
+            <input type="checkbox" id="checkSymbols" class="pass-gen__switch-input" checked>
+            <div class="pass-gen__switch-track">
+              <span class="pass-gen__switch-thumb"></span>
+            </div>
+          </label>
+
+        </div>
       </div>
 
+      <!-- Action Button -->
+      <button class="pass-gen__btn-primary" id="generateBtn">
+        <span class="material-symbols-outlined">refresh</span>
+        Generar Nueva Contraseña
+      </button>
       
+      <!-- Mensaje de Error (vacío por defecto) -->
+      <div class="pass-gen__error" id="errorMessage" aria-live="polite"></div>
+    </div>
+  </main>
 
-    <div class="contentListPssw inactive">
-      <div class="container">
-        <h2 class="title">Contraseñas guardadas</h2>
-        <p>En esta sección se encuentran las contraseñas que se han generado y copiado anteriormente</p>
-
-        <ul class="listPssw">    
-        </ul>
-        
-        <div class="bgIcons" id="iconCloseContainerSavedPssw">
-          <img src="./icons/close.svg" alt="">
-        </div>        
+  <!-- Modal para Contraseñas Guardadas -->
+  <div class="modal modal--hidden" id="savedModal" aria-hidden="true">
+    <div class="modal__content">
+      <div class="modal__header">
+        <div>
+          <h2 class="modal__title">Contraseñas guardadas</h2>
+          <p class="modal__description">Contraseñas generadas y copiadas anteriormente.</p>
+        </div>
+        <button class="modal__close" id="closeSavedBtn" aria-label="Cerrar modal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
+      <ul class="modal__list" id="savedList"></ul>
     </div>
-    
-    <div class="bgIcons taskNone" id="iconTaskOK">
-      <img src="./icons/task_ok.svg" alt="">
-    </div>
-    
-    <script src="./js/pssw.js"></script>
-  </body>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast toast--hidden" id="toastTaskOK" aria-live="polite">
+    <span class="material-symbols-outlined toast__icon">task_alt</span>
+    <span class="toast__text">¡Acción exitosa!</span>
+  </div>
+
+  <script src="./js/pssw.js"></script>
+</body>
 </html>
