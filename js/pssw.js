@@ -10,6 +10,7 @@ const outputInput = document.getElementById("passwordOutput");
 const generateBtn = document.getElementById("generateBtn");
 const copyBtn = document.getElementById("copyBtn");
 const copyIcon = document.getElementById("copyIcon");
+const securityBar = document.getElementById("securityBar");
 
 const lengthRange = document.getElementById("lengthRange");
 const lengthDisplay = document.getElementById("lengthDisplay");
@@ -21,11 +22,13 @@ const checkNumbers = document.getElementById("checkNumbers");
 
 const errorMessageContainer = document.getElementById("errorMessage");
 
+const openSavedBtn = document.getElementById("openSavedBtn");
 const closeSavedBtn = document.getElementById("closeSavedBtn");
 const savedModal = document.getElementById("savedModal");
 const savedList = document.getElementById("savedList");
 
 const toastTaskOK = document.getElementById("toastTaskOK");
+const toastText = document.getElementById("toastText");
 
 // ==========================================
 // 2. STATE & CONSTANTS
@@ -52,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 generateBtn.addEventListener("click", generatePassword);
+
 copyBtn.addEventListener("click", () => {
   if (outputInput.value && outputInput.value !== "Cargando...") {
     copyToClipboard(outputInput.value);
@@ -60,7 +64,8 @@ copyBtn.addEventListener("click", () => {
   }
 });
 
-closeSavedBtn.addEventListener("click", closeSavedModal);
+if (openSavedBtn) openSavedBtn.addEventListener("click", openSavedModal);
+if (closeSavedBtn) closeSavedBtn.addEventListener("click", closeSavedModal);
 
 // Delegación de eventos para la lista dinámica de contraseñas guardadas
 savedList.addEventListener("click", handleSavedListClick);
@@ -75,6 +80,7 @@ savedList.addEventListener("click", handleSavedListClick);
 function synchronizeLengthInputs() {
   lengthRange.addEventListener("input", () => {
     lengthDisplay.textContent = lengthRange.value;
+    generatePassword(); // Generar automáticamente al mover el slider para feedback en tiempo real
   });
 }
 
@@ -82,14 +88,22 @@ function synchronizeLengthInputs() {
  * Muestra el mensaje de error si no hay checkboxes seleccionados.
  */
 function renderError(show) {
+  // Limpieza segura sin innerHTML
+  while (errorMessageContainer.firstChild) {
+    errorMessageContainer.removeChild(errorMessageContainer.firstChild);
+  }
+
   if (show) {
-    errorMessageContainer.innerHTML = `
-      <span class="material-symbols-outlined">error</span>
-      <span>Selecciona al menos un tipo de carácter</span>
-    `;
+    const icon = document.createElement("span");
+    icon.className = "material-symbols-outlined";
+    icon.textContent = "error";
+    
+    const text = document.createElement("span");
+    text.textContent = "Selecciona al menos un tipo de carácter";
+    
+    errorMessageContainer.append(icon, text);
     outputInput.value = "";
-  } else {
-    errorMessageContainer.innerHTML = "";
+    updateSecurityMeter("");
   }
 }
 
@@ -144,6 +158,40 @@ function generatePassword() {
 
   lastGeneratedPassword = password.join("");
   outputInput.value = lastGeneratedPassword;
+  updateSecurityMeter(lastGeneratedPassword);
+}
+
+/**
+ * Calcula y visualiza el nivel de seguridad de la contraseña.
+ */
+function updateSecurityMeter(password) {
+  if (!securityBar) return;
+  
+  let score = 0;
+  if (!password) {
+    securityBar.style.width = "0%";
+    return;
+  }
+
+  // Factor longitud (hasta 40 puntos)
+  score += Math.min(password.length * 2, 40);
+
+  // Variedad (15 puntos c/u)
+  if (/[a-z]/.test(password)) score += 15;
+  if (/[A-Z]/.test(password)) score += 15;
+  if (/[0-9]/.test(password)) score += 15;
+  if (/[^A-Za-z0-9]/.test(password)) score += 15;
+
+  securityBar.style.width = `${score}%`;
+
+  // Colores dinámicos basados en CSS Variables
+  if (score < 45) {
+    securityBar.style.backgroundColor = "var(--error)";
+  } else if (score < 75) {
+    securityBar.style.backgroundColor = "var(--warning)";
+  } else {
+    securityBar.style.backgroundColor = "var(--success)";
+  }
 }
 
 /**
@@ -153,7 +201,7 @@ function generatePassword() {
 function copyToClipboard(text) {
   if (!text) return;
   navigator.clipboard.writeText(text).then(() => {
-    showToast();
+    showToast("Contraseña copiada");
   });
 }
 
@@ -162,11 +210,12 @@ function copyToClipboard(text) {
  */
 function animateCopyFeedback() {
   copyBtn.classList.add("is-copied");
+  const originalIcon = copyIcon.textContent;
   copyIcon.textContent = "check_circle";
 
   setTimeout(() => {
     copyBtn.classList.remove("is-copied");
-    copyIcon.textContent = "content_copy";
+    copyIcon.textContent = originalIcon;
   }, 2000);
 }
 
@@ -180,18 +229,38 @@ function savePasswordToList(passwordText) {
   const li = document.createElement("li");
   li.className = "modal__item";
   
-  li.innerHTML = `
-    <span class="modal__item-value">${passwordText}</span>
-    <div class="modal__item-actions">
-      <button class="action-copy" aria-label="Copiar" title="Copiar">
-        <span class="material-symbols-outlined">content_copy</span>
-      </button>
-      <button class="action-delete" aria-label="Eliminar" title="Eliminar">
-        <span class="material-symbols-outlined">delete</span>
-      </button>
-    </div>
-  `;
-
+  const spanValue = document.createElement("span");
+  spanValue.className = "modal__item-value";
+  spanValue.textContent = passwordText;
+  
+  const actionsDiv = document.createElement("div");
+  actionsDiv.className = "modal__item-actions";
+  
+  // Botón copiar en el modal
+  const copyBtnModal = document.createElement("button");
+  copyBtnModal.className = "action-copy";
+  copyBtnModal.setAttribute("aria-label", "Copiar");
+  copyBtnModal.title = "Copiar";
+  
+  const copyIconModal = document.createElement("span");
+  copyIconModal.className = "material-symbols-outlined";
+  copyIconModal.textContent = "content_copy";
+  copyBtnModal.append(copyIconModal);
+  
+  // Botón eliminar en el modal
+  const deleteBtnModal = document.createElement("button");
+  deleteBtnModal.className = "action-delete";
+  deleteBtnModal.setAttribute("aria-label", "Eliminar");
+  deleteBtnModal.title = "Eliminar";
+  
+  const deleteIconModal = document.createElement("span");
+  deleteIconModal.className = "material-symbols-outlined";
+  deleteIconModal.textContent = "delete";
+  deleteBtnModal.append(deleteIconModal);
+  
+  actionsDiv.append(copyBtnModal, deleteBtnModal);
+  li.append(spanValue, actionsDiv);
+  
   savedList.prepend(li); // Agregar al inicio de la lista
 }
 
@@ -205,13 +274,14 @@ function handleSavedListClick(event) {
   if (!button) return;
 
   const listItem = button.closest(".modal__item");
-  const passwordText = listItem.querySelector(".modal__item-value").textContent;
+  const passwordValueSpan = listItem.querySelector(".modal__item-value");
+  const passwordText = passwordValueSpan ? passwordValueSpan.textContent : "";
 
   if (button.classList.contains("action-copy")) {
     copyToClipboard(passwordText);
   } else if (button.classList.contains("action-delete")) {
     listItem.remove();
-    showToast();
+    showToast("Contraseña eliminada");
   }
 }
 
@@ -233,8 +303,10 @@ function closeSavedModal() {
 
 /**
  * Muestra el toast de confirmación temporalmente.
+ * @param {string} message - El mensaje a mostrar.
  */
-function showToast() {
+function showToast(message) {
+  if (toastText) toastText.textContent = message;
   toastTaskOK.classList.add("toast--show");
   
   // Limpiar timeout anterior si existe

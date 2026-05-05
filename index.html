@@ -24,16 +24,36 @@
       
       <!-- Header -->
       <div class="pass-gen__header">
-        <h1 class="pass-gen__title">Generador de Contraseñas</h1>
+        <div class="pass-gen__header-top">
+          <h1 class="pass-gen__title">Generador de Contraseñas</h1>
+          <button class="pass-gen__history-btn" id="openSavedBtn" aria-label="Ver historial" title="Historial">
+            <span class="material-symbols-outlined">history</span>
+          </button>
+        </div>
         <p class="pass-gen__subtitle">Crea una contraseña segura y robusta.</p>
       </div>
 
-      <!-- Display -->
-      <div class="password-group" id="passwordGroup">
-        <input type="text" class="password-group__input" id="passwordOutput" readonly aria-label="Contraseña generada" value="Cargando..." />
-        <button class="password-group__copy-btn" id="copyBtn" aria-label="Copiar contraseña">
-          <span class="material-symbols-outlined password-group__copy-icon" id="copyIcon">content_copy</span>
-        </button>
+      <!-- Área de Salida Agrupada -->
+      <div class="pass-gen__output-area">
+        <div class="password-group">
+          <input type="text" class="password-group__input" id="passwordOutput" aria-label="Contraseña generada" value="Cargando..." />
+        </div>
+        
+        <div class="password-actions">
+          <button class="password-actions__btn" id="copyBtn" aria-label="Copiar contraseña">
+            <span class="material-symbols-outlined" id="copyIcon">content_copy</span>
+            <span>Copiar</span>
+          </button>
+          <button class="password-actions__btn password-actions__btn--primary" id="generateBtn" aria-label="Generar nueva contraseña">
+            <span class="material-symbols-outlined">refresh</span>
+            <span>Generar</span>
+          </button>
+        </div>
+
+        <!-- Barra de Seguridad -->
+        <div class="security-meter">
+          <div class="security-meter__bar" id="securityBar"></div>
+        </div>
       </div>
 
       <!-- Controls -->
@@ -88,11 +108,7 @@
         </div>
       </div>
 
-      <!-- Action Button -->
-      <button class="pass-gen__btn-primary" id="generateBtn">
-        <span class="material-symbols-outlined">refresh</span>
-        Generar Nueva Contraseña
-      </button>
+
       
       <!-- Mensaje de Error (vacío por defecto) -->
       <div class="pass-gen__error" id="errorMessage" aria-live="polite"></div>
@@ -118,7 +134,7 @@
   <!-- Toast -->
   <div class="toast toast--hidden" id="toastTaskOK" aria-live="polite">
     <span class="material-symbols-outlined toast__icon">task_alt</span>
-    <span class="toast__text">¡Acción exitosa!</span>
+    <span class="toast__text" id="toastText">Contraseña copiada</span>
   </div>
 
   <script src="./js/pssw.js"></script>

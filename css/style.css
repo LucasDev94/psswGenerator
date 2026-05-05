@@ -15,6 +15,7 @@
   --outline: #707880;
   --outline-variant: #c0c7d1;
   --error: #ba1a1a;
+  --warning: #f5d04b;
   --success: #00B37E; /* Tech Mint */
   --background: #f7f9fb;
   /* Variables Estructurales - Reducidas un 20% para versión compacta */
@@ -45,7 +46,6 @@ body {
   font-family: var(--font-family);
   color: var(--on-surface);
   background-color: var(--background);
-  /* Fondo radial corregido */
   background-image: radial-gradient(circle at 50% 0%, rgba(0, 131, 202, 0.05) 0%, transparent 60%);
   min-height: 100vh;
   display: flex;
@@ -64,7 +64,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem; /* Reducido un 20% */
+  padding: 1.2rem;
   position: relative;
 }
 
@@ -92,82 +92,184 @@ body {
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 440px;
-  padding: 1.6rem; /* Reducido un 20% */
+  max-width: 480px;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem; /* Reducido un 20% */
+  gap: 1.6rem;
   position: relative;
   z-index: 10;
+  transition: max-width 0.3s ease;
+}
+@media (max-width: 480px) {
+  .pass-gen {
+    max-width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 1.2rem;
+  }
 }
 .pass-gen__header {
-  text-align: center;
+  text-align: left;
+}
+.pass-gen__header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+.pass-gen__history-btn {
+  background: var(--surface-variant);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.pass-gen__history-btn:hover {
+  background: var(--surface-container-lowest);
+  border-color: var(--primary-container);
+  color: var(--primary-container);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.pass-gen__history-btn:active {
+  transform: scale(0.95);
+}
+.pass-gen__history-btn .material-symbols-outlined {
+  font-size: 1.4rem;
 }
 .pass-gen__title {
-  font-size: 1.8rem; /* Tamaño solicitado */
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--on-surface);
   line-height: 1.25;
   letter-spacing: -0.01em;
-  margin-bottom: 0.2rem;
+}
+@media (max-width: 375px) {
+  .pass-gen__title {
+    font-size: 1.5rem;
+  }
 }
 .pass-gen__subtitle {
   font-size: 0.9rem;
   color: var(--on-surface-variant);
 }
 .pass-gen {
-  /* Password Group Refactorizado - ADN Nextcloud */
+  /* Área de Salida Agrupada */
+}
+.pass-gen__output-area {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.pass-gen__output-area:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.pass-gen {
+  /* Password Group */
 }
 .pass-gen .password-group {
-  display: flex;
-  align-items: stretch;
-  gap: 0.6rem;
+  padding: 1.2rem 1rem 0.6rem;
 }
 .pass-gen .password-group__input {
-  flex: 1;
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
-  padding: 0.6rem 1rem;
+  width: 100%;
+  background: transparent;
+  border: none;
   font-family: monospace;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--on-surface);
   outline: none;
-  transition: all 0.2s ease;
   text-align: center;
+  letter-spacing: 0.05em;
 }
-.pass-gen .password-group__input:focus {
-  border-color: var(--primary-container);
-  box-shadow: 0 0 0 2px rgba(0, 106, 161, 0.1);
+@media (max-width: 400px) {
+  .pass-gen .password-group__input {
+    font-size: 1.3rem;
+  }
 }
-.pass-gen .password-group__copy-btn {
-  background: var(--surface-container-lowest);
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
-  padding: 0 0.8rem;
-  color: var(--secondary);
-  cursor: pointer;
+.pass-gen {
+  /* Password Actions Row */
+}
+.pass-gen .password-actions {
+  display: flex;
+  padding: 0.6rem 1rem 1.2rem;
+  gap: 0.8rem;
+}
+@media (max-width: 360px) {
+  .pass-gen .password-actions {
+    gap: 0.4rem;
+    padding: 0.6rem 0.5rem 1rem;
+  }
+}
+.pass-gen .password-actions__btn {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.2s;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface);
+  color: var(--on-surface);
 }
-.pass-gen .password-group__copy-btn:hover {
+@media (max-width: 360px) {
+  .pass-gen .password-actions__btn {
+    padding: 0.6rem 0.3rem;
+    font-size: 0.8rem;
+    gap: 0.2rem;
+  }
+}
+.pass-gen .password-actions__btn .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+.pass-gen .password-actions__btn:hover {
   background: var(--surface-variant);
-  color: var(--primary-container);
 }
-.pass-gen .password-group__copy-btn.is-copied {
+.pass-gen .password-actions__btn:active {
+  transform: scale(0.98);
+}
+.pass-gen .password-actions__btn--primary {
+  background: var(--primary-container);
+  color: var(--on-primary);
+  border-color: var(--primary-container);
+}
+.pass-gen .password-actions__btn--primary:hover {
+  background: var(--primary-hover);
+}
+.pass-gen .password-actions__btn.is-copied {
   background: var(--success);
   border-color: var(--success);
   color: var(--on-primary);
 }
-.pass-gen .password-group__copy-btn.is-copied .password-group__copy-icon {
-  transform: scale(1.15);
+.pass-gen {
+  /* Security Meter Bar */
 }
-.pass-gen .password-group__copy-icon {
-  font-size: 1.4rem;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.pass-gen .security-meter {
+  height: 4px;
+  width: 100%;
+  background: var(--surface-variant);
+  position: relative;
+}
+.pass-gen .security-meter__bar {
+  height: 100%;
+  width: 0%;
+  background: var(--error);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s;
 }
 .pass-gen__controls {
   display: flex;
@@ -201,12 +303,12 @@ body {
 }
 .pass-gen__range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 14px;
-  width: 14px;
+  height: 16px;
+  width: 16px;
   border-radius: 50%;
   background: var(--primary-container);
   cursor: pointer;
-  margin-top: -5px;
+  margin-top: -6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .pass-gen__range::-webkit-slider-runnable-track {
@@ -228,12 +330,16 @@ body {
 .pass-gen__switch {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1.5rem;
   cursor: pointer;
+  padding: 0.2rem 0;
 }
 .pass-gen__switch-label {
   font-size: 0.85rem;
   color: var(--on-surface);
+  width: 140px; /* Ancho fijo para alinear los controles */
+  text-align: right;
 }
 .pass-gen__switch-input {
   display: none;
@@ -242,8 +348,8 @@ body {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 1.2rem;
-  width: 2.2rem;
+  height: 1.3rem;
+  width: 2.4rem;
   border-radius: 9999px;
   background: var(--surface-variant);
   transition: background-color 0.2s;
@@ -251,8 +357,8 @@ body {
 }
 .pass-gen__switch-thumb {
   display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.9rem;
+  height: 0.9rem;
   transform: translateX(0.2rem);
   background: var(--outline);
   border-radius: 9999px;
@@ -263,31 +369,8 @@ body {
   border-color: var(--primary-container);
 }
 .pass-gen__switch-input:checked + .pass-gen__switch-track .pass-gen__switch-thumb {
-  transform: translateX(1.2rem);
+  transform: translateX(1.3rem);
   background: var(--on-primary);
-}
-.pass-gen__btn-primary {
-  width: 100%;
-  background: var(--primary-container);
-  color: var(--on-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-md);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s;
-}
-.pass-gen__btn-primary:hover {
-  background: var(--primary-hover);
-}
-.pass-gen__btn-primary .material-symbols-outlined {
-  font-size: 1.1rem;
 }
 .pass-gen__error {
   display: flex;
@@ -338,6 +421,13 @@ body {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 440px) {
+  .modal__content {
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
 .modal__header {
   display: flex;
   justify-content: space-between;
@@ -349,21 +439,6 @@ body {
 .modal__title {
   font-size: 1.1rem;
   font-weight: 700;
-}
-.modal__description {
-  font-size: 0.8rem;
-  color: var(--on-surface-variant);
-}
-.modal__close {
-  background: transparent;
-  border: none;
-  color: var(--on-surface-variant);
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-}
-.modal__close:hover {
-  background: rgba(0, 0, 0, 0.05);
 }
 .modal__list {
   list-style: none;
@@ -384,24 +459,40 @@ body {
 .modal__item-value {
   font-family: monospace;
   font-size: 0.9rem;
+  word-break: break-all;
 }
 .modal__item-actions {
   display: flex;
-  gap: 6px;
+  gap: 0.4rem;
 }
-.modal__item-actions button {
-  background: transparent;
-  border: none;
+.modal__item-actions .action-copy, .modal__item-actions .action-delete {
+  background: var(--surface-variant);
+  border: 1px solid var(--outline-variant);
   color: var(--on-surface-variant);
   cursor: pointer;
-  padding: 4px;
+  padding: 0.4rem;
+  border-radius: var(--radius-md);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
-.modal__item-actions button:hover {
+.modal__item-actions .action-copy .material-symbols-outlined, .modal__item-actions .action-delete .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+.modal__item-actions .action-copy:hover, .modal__item-actions .action-delete:hover {
+  border-color: var(--primary-container);
   color: var(--primary-container);
+  background: var(--surface-container-lowest);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-.modal__item-actions button.action-delete:hover {
+.modal__item-actions .action-copy:active, .modal__item-actions .action-delete:active {
+  transform: scale(0.92);
+}
+.modal__item-actions .action-delete:hover {
+  border-color: var(--error);
   color: var(--error);
+  background: rgba(186, 26, 26, 0.05);
 }
 
 .toast {
