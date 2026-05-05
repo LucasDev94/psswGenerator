@@ -75,6 +75,16 @@ savedList.addEventListener("click", handleSavedListClick);
 // ==========================================
 
 /**
+ * Genera un número entero aleatorio criptográficamente seguro entre 0 y max - 1.
+ * Sustituye a Math.floor(Math.random() * max)
+ */
+function getRandomInt(max) {
+  const array = new Uint32Array(1);
+  window.crypto.getRandomValues(array);
+  return array[0] % max;
+}
+
+/**
  * Sincroniza el input range con el span de visualización.
  */
 function synchronizeLengthInputs() {
@@ -132,16 +142,16 @@ function generatePassword() {
 
   // Ciclo para elegir elementos al azar
   for (let i = 0; i < length; i++) {
-    let selectedPool = charPools[Math.floor(Math.random() * charPools.length)];
     
-    // Original logic: Si hay símbolos, se reduce temporalmente el pool 
+    let selectedPool; 
+    // Si hay símbolos, se reduce temporalmente el pool para que no salgan en esta iteración
     if (checkSymbols.checked) {
-      selectedPool = charPools[Math.floor(Math.random() * (charPools.length - 1))];
-      // Manejo de edge case si el único pool seleccionado es el de símbolos
-      if (!selectedPool) selectedPool = charPools[0]; 
+      selectedPool = charPools[getRandomInt(charPools.length - 1)]; 
+    } else {
+      selectedPool = charPools[getRandomInt(charPools.length)];
     }
 
-    let charIndex = Math.floor(Math.random() * selectedPool.length);
+    let charIndex = getRandomInt(selectedPool.length);
     password.push(selectedPool[charIndex]);
   }
 
@@ -150,8 +160,8 @@ function generatePassword() {
     const symbolCount = Math.floor(length / 6);
     for (let i = 0; i < symbolCount; i++) {
       password.pop(); // Quita el último para mantener longitud
-      let newPosition = Math.floor(Math.random() * password.length) + 1; // Evita símbolo al inicio
-      let newSymbol = characteres[3][Math.floor(Math.random() * characteres[3].length)];
+      let newPosition = getRandomInt(password.length) + 1; // Evita símbolo al inicio
+      let newSymbol = characteres[3][getRandomInt(characteres[3].length)];
       password.splice(newPosition, 0, newSymbol);
     }
   }
